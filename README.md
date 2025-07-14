@@ -1,7 +1,6 @@
-# terraform-aws-setup
-# 🌩️ Secure & Scalable AWS Cloud Setup with Terraform
+# 🌩️ Scalable 3-Tier AWS Infrastructure using Terraform
 
-This project builds a **three-tier AWS infrastructure** using **Terraform**. It's designed to be modular, scalable, and production-ready — a great DevOps portfolio project.
+This project sets up a **production-grade 3-tier AWS infrastructure** using **Terraform**, including a **public subnet**, **private subnet**, **EC2**, **RDS**, and a **NAT Gateway**. It's modular, secure, scalable, and ready for real-world applications or DevOps job interviews.
 
 ---
 
@@ -10,68 +9,92 @@ This project builds a **three-tier AWS infrastructure** using **Terraform**. It'
 ![Architecture Diagram](./A_diagram_in_the_image_depicts_a_three-tier_cloud_.png)
 
 ### Components:
-- **VPC with public & private subnets**
-- **EC2 instance in the public subnet**
-- **Internet Gateway + Security Groups**
-- **Route Tables**
-- **SSH access with key pairs**
-- *(Coming soon: RDS in private subnet + NAT Gateway + Bastion)*
+- ✅ VPC with custom CIDR
+- ✅ Public Subnet (for Bastion/EC2)
+- ✅ Private Subnet (for RDS)
+- ✅ Internet Gateway + NAT Gateway
+- ✅ Route Tables
+- ✅ EC2 instance (Amazon Linux 2)
+- ✅ RDS (MySQL 8.0) in Private Subnet
+- ✅ Security Groups with Least Privilege
+- ✅ Remote SSH Access
+- ✅ GitHub Repository with IaC
 
 ---
 
-## 📦 Technologies Used
+## 📦 Tech Stack
 
-| Tool        | Purpose                         |
-|-------------|----------------------------------|
-| Terraform   | Infrastructure as Code (IaC)     |
-| AWS EC2     | Virtual machine instances        |
-| AWS VPC     | Virtual private networking       |
-| Git & GitHub| Version control & repo hosting   |
+| Tool         | Purpose                         |
+|--------------|----------------------------------|
+| Terraform    | Infrastructure as Code (IaC)     |
+| AWS VPC      | Private Networking               |
+| AWS EC2      | Compute resource (App server)    |
+| AWS RDS      | Managed DB in private subnet     |
+| Git + GitHub | Version control & collaboration  |
 
 ---
 
-## 📁 File Structure
+## 📁 Folder Structure
 
 terraform-aws-setup/
-│
-├── ec2.tf # EC2 + Key Pair
-├── vpc.tf # VPC, Subnets, Routes
-├── variables.tf # Input variables
-├── outputs.tf # Output values
+├── ec2.tf # EC2 & key pair
+├── vpc.tf # VPC, subnets, routing
 ├── security.tf # Security groups
-├── provider.tf # AWS provider setup
-├── .gitignore # Terraform cache ignored
+├── rds.tf # MySQL RDS setup
+├── variables.tf # Input variables
+├── outputs.tf # Terraform outputs
+├── provider.tf # AWS provider block
+├── .gitignore # Terraform state/cache ignore
 └── README.md # Project documentation
-
 
 ---
 
-## 🧑‍💻 How to Use
+## 🧠 Terraform Highlights
 
-1. ✅ Clone the repo  
-2. 🔐 Configure your `~/.aws/credentials`  
-3. 🗝️ Ensure your SSH key is correctly set in `ec2.tf`  
-4. 🌱 Run:
-```bash
+- Uses **modular code structure** for clarity
+- Manages all networking: VPC, subnets, route tables
+- NAT gateway enables secure outbound internet from private subnet
+- Private RDS instance accessible **only** from EC2
+- `terraform output` provides RDS endpoint
+
+---
+
+## 🛠️ How to Use
+
+### 🧰 Prerequisites:
+- AWS CLI & Terraform installed
+- AWS credentials set in `~/.aws/credentials`
+- Valid EC2 key pair
+
+### 🧪 Steps:
+
 terraform init
 terraform plan
 terraform apply
 
+Then:
 
-🎯 What's Next
- Add RDS instance in private subnet
+SSH into EC2 → install MySQL client
 
- Setup NAT Gateway for internet access
+Connect to RDS: mysql -h <rds-endpoint> -P 3306 -u admin -p
 
- Add Bastion Host for secure access
+🔒 Security Practices
+EC2 SG allows SSH only from your IP
 
- Deploy containerized app via ECS (future scope)
+RDS SG allows access only from EC2 SG
 
-🧠 Author
-👨‍💻 Rohan Mandal
-🛠️ DevOps & Cloud Enthusiast
+RDS not publicly accessible
+
+Infrastructure is destroyable via terraform destroy
+
+
+
+👨‍💻 Author
+Rohan Mandal
 📍 Kolkata, India
 🌐 GitHub
+💼 DevOps & Cloud Enthusiast
+
 
 📜 License
-MIT License. Feel free to use or modify.
+MIT License. Use, modify, and share freely.
