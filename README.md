@@ -1,6 +1,6 @@
 # 🌩️ Scalable 3-Tier AWS Infrastructure using Terraform
 
-This project sets up a **production-grade 3-tier AWS infrastructure** using **Terraform**, including a **public subnet**, **private subnet**, **EC2**, **RDS**, and a **NAT Gateway**. It's modular, secure, scalable, and ready for real-world applications or DevOps job interviews.
+This project sets up a **production-grade 3-tier AWS infrastructure** using **Terraform**, including a **public subnet**, **private subnet**, **EC2**, **RDS**, and a **NAT Gateway**. It's modular, secure, scalable, and ready for real-world applications.
 
 ---
 
